@@ -1151,7 +1151,7 @@ async function generate(content, originalName, options = {}) {
     coverBase64,
     endPagesBase64,
     buildingPhotos: buildingPhotosBase64,
-  }), { waitUntil: 'networkidle0' });
+  }), { waitUntil: 'load', timeout: 60000 });
 
   const pdfBuffer = await page.pdf({
     format: 'A4',
