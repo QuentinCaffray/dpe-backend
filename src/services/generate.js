@@ -1,9 +1,5 @@
 const puppeteer = require('puppeteer');
-const fs = require('fs');
-const path = require('path');
 
-// Chemin vers l'image de couverture par défaut
-const COVER_IMAGE_PATH = path.join(__dirname, '..', 'assets', 'couverture.png');
 
 // ─── Utilitaires couleur ───
 
@@ -31,19 +27,6 @@ function lightenColor(hex, amount) {
 
 // ─── Images ───
 
-function getCoverImageBase64() {
-  try {
-    if (fs.existsSync(COVER_IMAGE_PATH)) {
-      const buffer = fs.readFileSync(COVER_IMAGE_PATH);
-      const ext = path.extname(COVER_IMAGE_PATH).slice(1).toLowerCase();
-      const mime = ext === 'jpg' ? 'jpeg' : ext;
-      return `data:image/${mime};base64,${buffer.toString('base64')}`;
-    }
-  } catch (err) {
-    console.error('Erreur lecture couverture:', err.message);
-  }
-  return null;
-}
 
 function bufferToBase64(buffer, mime) {
   return `data:${mime};base64,${buffer.toString('base64')}`;
@@ -400,7 +383,7 @@ function generateHTML(content, originalName, options = {}) {
   const veryLightBg2 = lightenColor(primaryColor, 0.95);
 
   // Couverture
-  const coverImage = coverBase64 || getCoverImageBase64();
+  const coverImage = coverBase64;
   const coverPage = coverImage ? `
     <div class="cover-page">
       <img src="${coverImage}" alt="Couverture"/>
