@@ -6,6 +6,9 @@
     "dev": "node --watch src/index.js",
     "postinstall": "npx puppeteer browsers install chrome"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
